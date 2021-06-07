@@ -22,6 +22,15 @@ class Crane:
 
 
 if __name__ == '__main__':
+    conn, cursor = connect_to_db()
+    init_database(cursor, conn)
+    init_sql_table(cursor, conn, "lift", d_lift, False)
+
+    update_sql(cursor, conn, "lift", ("0"), False, d_lift)
+    update_sql(cursor, conn, "driver", ("0"), False, d_lift)
+
+    print_sql_row(cursor, "lift")
+
 
     cr = Crane()
 
