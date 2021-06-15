@@ -70,9 +70,12 @@ class lynxmotion:
 
 
 if __name__ == '__main__':
+    time.sleep(4)
     cr = lynxmotion()
-    time.sleep(2)
-    cr.pick()
+    time.sleep(1)
+    cr.close_cage()
+    time.sleep(5)
+    cr.open_cage()
     # time.sleep(3)
     # cr.close_cage()
     # time.sleep(2)

@@ -26,23 +26,29 @@ if __name__ == '__main__':
     init_database(cursor, conn)
     init_sql_table(cursor, conn, "lift", d_lift, False)
 
-    update_sql(cursor, conn, "lift", ("0"), False, d_lift)
-    update_sql(cursor, conn, "driver", ("0"), False, d_lift)
-
     print_sql_row(cursor, "lift")
-
 
     cr = Crane()
 
-    ID = 0
-    conn, cursor = connect_to_db()
     while True:
-        while int(ID) >= int(get_last_table_elem(cursor, "ID", "lift")):
-            continue
-        ID = get_last_table_elem(cursor, "ID", "lift")
-        msg = get_last_table_elem(cursor, "command", "lift")
-        msg += '\r'
-        cr.move_arm(msg)
+        try:
+            ## get the next row that hasnt been executed yet
+            curr_ID, new_command = get_row_by_condition(cursor, "is_commited=0", "lift")
+            print(new_command)
+            if new_command is None:
+                continue
+
+            ## extract angle,speed and driving distance from the row
+            try:
+                ## execute command
+                cr.pick()
+                print("finished command?")
+            except Exception as crane_error:
+                print(drv_cmd_err)
+            ## update the row to executed status
+            set_element_in_row(cursor, "is_commited", curr_ID, "lift", "1")
+        except Exception as err:
+            print(err)
 
 
 
