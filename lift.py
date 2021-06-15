@@ -44,7 +44,7 @@ if __name__ == '__main__':
                 cr.pick()
                 print("finished command?")
             except Exception as crane_error:
-                print(drv_cmd_err)
+                print(crane_error)
             ## update the row to executed status
             set_element_in_row(cursor, "is_commited", curr_ID, "lift", "1")
         except Exception as err:
