@@ -13,15 +13,9 @@ class Crane:
             bytesize=serial.EIGHTBITS
     )
 
-    def move_arm(self, msg):
-        # msg = "#" + str(servo_num) + "P" + str(location)+"S" + str(speed)+ "\r"
-        print("moving arm msg {}\n".format(msg))
-        msg = bytes(bytearray(msg.encode()))
-        self.ser.write(msg)
-        self.ser.flush()
-
 
 if __name__ == '__main__':
+    ## connect to SQL
     conn, cursor = connect_to_db()
     init_database(cursor, conn)
     init_sql_table(cursor, conn, "lift", d_lift, False)

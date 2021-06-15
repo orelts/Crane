@@ -8,7 +8,7 @@ class lynxmotion:
     def __init__(self):
         ## serial connection initialization
         # preferebly there are 2 states in which the cage can be - open or closed, but there can be much more freedom
-        # in sellection of the apperature of the cage. same for the position of the arm - up or down
+        # in sellection of the apperature of the cage. same for the position of the arm - up or down, and wrist
 
         self.ser = serial.Serial(
             port='/dev/ttyUSB0', ## or ttyUSB0 or ttyS0 (or COM4 for windows)
@@ -55,6 +55,7 @@ class lynxmotion:
             self.use_servo(12, 1100, 900)
             self.use_servo(15, 1900, 900)
 
+    # full command to pick a plastic bottle
     def pick(self):
         self.close_cage()
         time.sleep(2)
